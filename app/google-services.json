@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "343930238615",
+    "project_id": "rememberme-aba89",
+    "storage_bucket": "rememberme-aba89.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:343930238615:android:4a0f03ea7d74f284efdbd2",
+        "android_client_info": {
+          "package_name": "com.example.rememberme"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBxX0DDbYfbyUR2Zf7vwJWcRMNei6zJxcs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
