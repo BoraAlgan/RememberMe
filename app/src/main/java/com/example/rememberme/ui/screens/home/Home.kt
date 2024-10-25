@@ -4,13 +4,16 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 
 @Composable
-fun Home(viewModel: HomeViewModel) {
+fun Home(navController: NavHostController, viewModel: HomeViewModel) {
 
     Column(
         modifier = Modifier
@@ -19,6 +22,13 @@ fun Home(viewModel: HomeViewModel) {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
+
+        Button(onClick = {
+            viewModel.signOut()
+            navController.navigate("login")
+        }) {
+            Text("Sign Out")
+        }
 
     }
 

@@ -1,4 +1,4 @@
-package com.example.rememberme.ui.screens.login
+package com.example.rememberme.ui.screens.register
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -8,21 +8,21 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class LoginViewModel @Inject constructor(private val firebaseAuthManager: FirebaseAuthManager) :
+class RegisterViewModel @Inject constructor(private val firebaseAuthManager: FirebaseAuthManager) :
     ViewModel() {
 
-    fun signIn(
+    fun signUp(
         email: String,
         password: String,
         onSuccess: () -> Unit,
         onError: (String) -> Unit
     ) {
         viewModelScope.launch {
-            val result = firebaseAuthManager.signIn(email, password)
+            val result = firebaseAuthManager.signUp(email, password)
             if (result != null) {
                 onSuccess()
             } else {
-                onError("E-posta veya şifre alanları hatalı.")
+                onError("Register failed")
             }
         }
     }

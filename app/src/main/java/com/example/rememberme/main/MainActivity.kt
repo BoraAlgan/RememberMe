@@ -10,6 +10,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.rememberme.ui.screens.home.Home
 import com.example.rememberme.ui.screens.login.Login
+import com.example.rememberme.ui.screens.register.Register
 import com.google.firebase.FirebaseApp
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -33,7 +34,10 @@ class MainActivity : ComponentActivity() {
                     Login(navController = controller, viewModel = hiltViewModel())
                 }
                 composable("home") {
-                    Home(viewModel = hiltViewModel())
+                    Home(navController = controller, viewModel = hiltViewModel())
+                }
+                composable("register") {
+                    Register(navController = controller, viewModel = hiltViewModel())
                 }
             }
 
