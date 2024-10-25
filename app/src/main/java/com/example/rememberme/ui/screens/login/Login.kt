@@ -35,8 +35,8 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.rememberme.ui.components.EmailInputFilter
-import com.example.rememberme.ui.components.PasswordInputFilter
+import com.example.rememberme.ui.components.EmailFilter
+import com.example.rememberme.ui.components.PasswordFilter
 
 
 @Composable
@@ -62,11 +62,11 @@ fun Login(navController: NavController, viewModel: LoginViewModel) {
             .fillMaxSize()
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+        verticalArrangement = Arrangement.Top
     ) {
-        EmailInputFilter(
+        EmailFilter(
             modifier = Modifier
-                .fillMaxWidth(),
+                .padding(bottom = 8.dp),
             value = email,
             onValueChange = {
                 email = it
@@ -81,20 +81,19 @@ fun Login(navController: NavController, viewModel: LoginViewModel) {
             label = "Email",
             showError = triggerValidationMail,
             errorText = errorTextMail,
-
             )
 
-//        Spacer(modifier = Modifier.height(16.dp))
-
-        PasswordInputFilter(
+        PasswordFilter(
             modifier = Modifier
-                .fillMaxWidth(),
+                .fillMaxWidth()
+                .padding(bottom = 8.dp),
             value = password,
             onValueChange = {
                 password = it
                 errorMessage = null
                 errorTextPassword = when {
-                    password.isEmpty() -> "Şifre alanı boş bırakılamaz."
+                    password.isBlank() -> "Şifre alanı boş bırakılamaz."
+                    password.contains(" ") -> "Şifre boşluk karakteri içeremez."
                     else -> ""
                 }
                 triggerValidationPassword = false
@@ -109,7 +108,7 @@ fun Login(navController: NavController, viewModel: LoginViewModel) {
                 if (showPassword) {
                     IconButton(onClick = { showPassword = false }) {
                         Icon(
-                            imageVector = Icons.Filled.Visibility,
+                            imageVector = Icons.Filled.VisibilityOff,
                             contentDescription = "Hide Password"
                         )
                     }
@@ -117,7 +116,7 @@ fun Login(navController: NavController, viewModel: LoginViewModel) {
                 } else {
                     IconButton(onClick = { showPassword = true }) {
                         Icon(
-                            imageVector = Icons.Filled.VisibilityOff,
+                            imageVector = Icons.Filled.Visibility,
                             contentDescription = "Show Password"
                         )
                     }
@@ -126,24 +125,24 @@ fun Login(navController: NavController, viewModel: LoginViewModel) {
             showPassword = showPassword,
             showError = triggerValidationPassword,
             errorText = errorTextPassword,
-            isError = triggerValidationPassword && errorTextPassword.isNotEmpty()
+            isError = triggerValidationPassword && password.isEmpty()
         )
 
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(8.dp))
 
         Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(16.dp),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Center
+            horizontalArrangement = Arrangement.SpaceAround
         ) {
             Button(
                 onClick = {
                     triggerValidationMail = true
                     triggerValidationPassword = true
 
-                    if (email.isNotEmpty() && password.isNotEmpty() &&
+                    if (email.isNotBlank() && password.isNotBlank() &&
                         (errorMessage == null || errorMessage == "E-posta veya şifre alanları hatalı.")
                     ) {
                         isLoading = true
